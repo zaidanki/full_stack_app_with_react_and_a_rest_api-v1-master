@@ -113,9 +113,16 @@ class UpdateCourse extends Component {
 
     // Updates as user types in inputs.
     handleChange = e => {
-        this.setState({
-            [e.currentTarget.name]: e.currentTarget.value
-        });
+        console.log(e.currentTarget)
+        if(e.currentTarget.value === ''){
+            this.setState({
+                errors: [ e.currentTarget.id + ' field needs to be filled in order to continue']
+            })
+        } else {
+            this.setState({
+                [e.currentTarget.name]: e.currentTarget.value
+            });
+        }
     };
 
     // Shows validation errors if title and description are not entered.
