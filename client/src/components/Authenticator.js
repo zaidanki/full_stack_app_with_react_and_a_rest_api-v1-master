@@ -14,12 +14,23 @@ class AuthProvider extends Component {
         password: null,
         confirmPassword: null,
         errors: null,
-        ownsCourse: false
+        ownsCourse: false,
+        errRest: null
+
     };
 
     componentDidMount() {
         this.updateUser();
+        this.setState({
+            errRest: this.errorReset()
+        })
     }
+
+    errorReset = () => {
+        this.setState({
+            errors : null,
+        })
+    };
 
 
     updateStorage = () => {
@@ -41,6 +52,7 @@ class AuthProvider extends Component {
     // this is to sign in
     signIn = e => {
         if (e) e.preventDefault();
+        this.errorReset()
         const { emailAddress, password } = this.state;
 // this is getting the users from  here
         axios.get('http://localhost:5000/api/users', {
@@ -58,17 +70,14 @@ class AuthProvider extends Component {
             });
             this.updateStorage();
         }).catch( e => {
-            console.log(e.response.data.message);
-            const message = e.response.data.message;
-            this.setState({
-                errors: [`The error was that ${message}`]
-            })
+            alert(e.response.data.message);
         });
     };
 
     signUp = e => {
         // this is to signup
         e.preventDefault();
+        this.errorReset()
         const {
             firstName,
             lastName,
@@ -109,6 +118,7 @@ class AuthProvider extends Component {
     };
 
     signOut = () => {
+        this.errorReset()
         this.setState({
             isAuth: false,
             name: null,
@@ -132,7 +142,7 @@ class AuthProvider extends Component {
 
     // Updates as user types in inputs.
     handleChange = e => {
-
+        this.errorReset()
         if(e.currentTarget.value === ''){
          this.setState({
              [e.currentTarget.name]: null

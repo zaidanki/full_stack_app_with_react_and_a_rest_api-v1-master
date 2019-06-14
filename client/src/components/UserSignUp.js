@@ -79,7 +79,7 @@ class UserSignUp extends Component {
                                                 <button className="button" type="submit">
                                                     Sign Up
                                                 </button>
-                                                <NavLink className="button button-secondary" to="/">
+                                                <NavLink  className="button button-secondary" to="/">
                                                     Cancel
                                                 </NavLink>
                                             </div>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 
-import { AuthConsumer } from './Authenticator';
-import ValidationErrors from "./ValidationErrors";
+import  { AuthConsumer } from './Authenticator';
+
+
 
 class UserSignIn extends Component {
     // this makes sure that the user cant sign in while already signed in!
@@ -10,7 +11,7 @@ class UserSignIn extends Component {
         const { from } = this.props.location.state || { from: { pathname: '/' } };
         return (
             <AuthConsumer>
-                {({ isAuth, handleChange, signIn, errors }) =>
+                {({ isAuth, handleChange, signIn }) =>
                     isAuth ? (
                         <Redirect to={from} />
                     ) : (
@@ -19,7 +20,6 @@ class UserSignIn extends Component {
                                         <h1>Sign In</h1>
 
                                         <div>
-                                            <ValidationErrors errors={errors}/>
                                             <form onSubmit={signIn}>
                                                 <div>
                                                     <input

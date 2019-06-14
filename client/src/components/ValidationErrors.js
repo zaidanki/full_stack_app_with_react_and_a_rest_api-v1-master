@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Displays if user does not enter a title or description in create or updateCourse or on signup.
 class ValidationErrors extends Component {
     render() {
+
         const { errors } = this.props;
         let valError = 'Whoops! Please fix this error:';
 
